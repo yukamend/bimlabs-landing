@@ -8,7 +8,7 @@ Plain static HTML/CSS — no build step.
 index.html     page content (tools + work cards)
 styles.css     styles
 images/        site screenshots (800×500 JPEG)
-favicon.svg
+favicon-32.png, icon-192.png, apple-touch-icon.png   favicons
 vercel.json    Vercel config (static, clean URLs)
 ```
 
