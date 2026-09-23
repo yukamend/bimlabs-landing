@@ -1,0 +1,149 @@
+:root {
+  --ink: #000;
+  --muted: rgba(0, 0, 0, 0.3);
+  --soft: rgba(0, 0, 0, 0.55);
+  --sub: rgba(0, 0, 0, 0.4);
+  --tile: rgba(0, 0, 0, 0.05);
+  --bg: #fff;
+  --side: 400px;
+  --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 16px/1.45 "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+p, h1, h2, h3 { margin: 0; }
+
+a { color: inherit; text-decoration: none; transition: color .2s; }
+
+.muted, .muted a, nav a { color: var(--muted); }
+.muted a:hover, nav a:hover, nav a.strong { color: var(--ink); }
+
+/* Sidebar */
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 32px;
+}
+
+.side-head { display: flex; justify-content: space-between; align-items: flex-start; }
+.side-head h1 { font-size: inherit; font-weight: 500; letter-spacing: -0.01em; line-height: 1.2; }
+.side-head .muted { font-weight: 500; letter-spacing: 0.02em; margin-top: 4px; }
+
+nav { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+
+.side-body { display: flex; flex-direction: column; gap: 20px; flex-grow: 1; }
+
+.side footer { font-size: 12px; line-height: 1.6; color: var(--sub); }
+
+/* Content */
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  padding: 40px;
+}
+
+section { display: flex; flex-direction: column; gap: 16px; scroll-margin-top: 32px; }
+section h2 { font-size: 14px; font-weight: 500; }
+section h2 .muted { font-weight: 400; margin-left: 4px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 32px;
+  align-items: start;
+}
+
+.card { display: flex; flex-direction: column; gap: 10px; }
+
+.tile {
+  aspect-ratio: 16 / 10;
+  padding: 10px;
+  background: var(--tile);
+  transition: opacity .2s;
+}
+.tile img, .tile .blank {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  background: #fff;
+}
+.tile .blank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.35);
+}
+
+.meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.meta > div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.meta h3 { font-size: 14px; font-weight: 500; }
+.sub { font-family: var(--mono); font-size: 12px; color: var(--sub); }
+
+.cta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: var(--muted);
+  transition: color .15s;
+}
+.cta svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 20;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.desc { font-size: 13px; line-height: 1.45; color: var(--soft); }
+
+.card:hover .tile { opacity: .6; }
+.card:hover .cta { color: var(--ink); }
+.card:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+
+/* Phone */
+@media (max-width: 767px) {
+  body { font-size: 14px; }
+  .side { padding: 16px; }
+  main { padding: 8px 16px 40px; gap: 48px; }
+}
+
+/* Tablet and up: fixed sidebar like deadsimplesites.com */
+@media (min-width: 768px) {
+  :root { --side: 340px; }
+  .side {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: var(--side);
+    overflow-y: auto;
+  }
+  main { margin-left: var(--side); }
+}
+
+@media (min-width: 1200px) {
+  :root { --side: 400px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+  html { scroll-behavior: auto; }
+}
